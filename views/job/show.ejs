@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>this is the show page</h1>
+
+    <li><%=g.name%></li>
+    <li><%=g.company%></li>
+    <li><%=g.description%></li>
+    <li><%=g.salary%></li>
+    <li><a href="/jobs/<%=g._id%>/comments/new"><button>Add Comment</button></a></li>
+    <%if(currentuser && g.author.id.equals(currentuser._id)){%>
+        <li><a href="/jobs/<%=g._id%>/edit">Edit Job</a></li>
+    <form method="POST" action="/jobs/<%=g._id%>?_method=DELETE">
+        <button type="submit">Delete Job</button>
+    </form>
+    <%}%>
+    
+        <%=countcomment%>
+        <% g.comments.forEach(function(ee){%>
+            <p><%=ee.text%></p>
+            <%if(currentuser && ee.author.id.equals(currentuser._id)){%>
+            <a href="/jobs/<%=g._id%>/comments/<%=ee._id%>/edit">
+                Edit comment
+            </a>
+            <form method="POST" action="/jobs/<%=g._id%>/comments/<%=ee._id%>?_method=DELETE">
+                <button type="submit">Delete Comment</button>
+            </form>
+            <%}%>
+        <%});%>
+            
+    
+</body>
+</html>

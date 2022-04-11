@@ -1,0 +1,31 @@
+
+body{
+    background-image: linear-gradient(to top,#2C3E50,#FD746C);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.formchanage{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.card{
+    text-align: center;
+    top:-45em;
+    transform-origin: 10px 10px;
+    animation:drop 0.5s ease forwards;
+    margin:8%  30% 30%;
+    max-width:40em;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+@keyframes drop{
+    0%{opacity: 0;}
+    70%{ transform:translateY(700px)}
+    100%{transform:translateY(650px); opacity:1;}
+}
