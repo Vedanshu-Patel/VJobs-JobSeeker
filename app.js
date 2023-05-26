@@ -25,7 +25,7 @@ var User = require('./models/user');
 var Comment = require('./models/comment');
 var Application = require('./models/application');
 
-mongoose.connect("mongodb://localhost:27017/VJobs");
+mongoose.connect("mongodb://127.0.0.1:27017/VJobs");
 
 
 //Passport configuration
