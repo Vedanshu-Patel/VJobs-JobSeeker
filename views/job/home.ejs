@@ -1,5 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VJobs</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <style>
+    body {
+      background: #323641;
+    }
+
+    .letter-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200px;
+      height: 200px;
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+
+    .animated-mail {
+      position: absolute;
+      height: 150px;
+      width: 200px;
+      -webkit-transition: .4s;
+      -moz-transition: .4s;
+      transition: .4s;
+
+      .body {
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 0 100px 200px;
+        border-color: transparent transparent #e95f55 transparent;
+        z-index: 2;
+      }
+
+      .top-fold {
+        position: absolute;
+        top: 50px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 50px 100px 0 100px;
+        -webkit-transform-origin: 50% 0%;
+        -webkit-transition: transform .4s .4s, z-index .2s .4s;
+        -moz-transform-origin: 50% 0%;
+        -moz-transition: transform .4s .4s, z-index .2s .4s;
+        transform-origin: 50% 0%;
+        transition: transform .4s .4s, z-index .2s .4s;
+        border-color: #cf4a43 transparent transparent transparent;
+        z-index: 2;
+      }
+
+      .back-fold {
+        position: absolute;
+        bottom: 0;
+        width: 200px;
+        height: 100px;
+        background: #cf4a43;
+        z-index: 0;
+      }
+
+      .left-fold {
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 50px 0 50px 100px;
+        border-color: transparent transparent transparent #e15349;
+        z-index: 2;
+      }
+
+      .letter {
+        left: 20px;
+        bottom: 0px;
+        position: absolute;
+        width: 160px;
+        height: 60px;
+        background: white;
+        z-index: 1;
+        overflow: hidden;
+        -webkit-transition: .4s .2s;
+        -moz-transition: .4s .2s;
+        transition: .4s .2s;
+
+        .letter-border {
+          height: 10px;
+          width: 100%;
+          background: repeating-linear-gradient(-45deg,
+              #cb5a5e,
+              #cb5a5e 8px,
+              transparent 8px,
+              transparent 18px);
+        }
+
+        .letter-title {
+          margin-top: 10px;
+          margin-left: 5px;
+          height: 10px;
+          width: 40%;
+          background: #cb5a5e;
+        }
+
+        .letter-context {
+          margin-top: 10px;
+          margin-left: 5px;
+          height: 10px;
+          width: 20%;
+          background: #cb5a5e;
+        }
+
+        .letter-stamp {
+          margin-top: 30px;
+          margin-left: 120px;
+          border-radius: 100%;
+          height: 30px;
+          width: 30px;
+          background: #cb5a5e;
+          opacity: 0.3;
+        }
+      }
+    }
+
+    .shadow {
+      position: absolute;
+      top: 200px;
+      left: 50%;
+      width: 400px;
+      height: 30px;
+      transition: .4s;
+      transform: translateX(-50%);
+      -webkit-transition: .4s;
+      -webkit-transform: translateX(-50%);
+      -moz-transition: .4s;
+      -moz-transform: translateX(-50%);
+
+      border-radius: 100%;
+      background: radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0));
+    }
+
+    .letter-image:hover {
+      .animated-mail {
+        transform: translateY(50px);
+        -webkit-transform: translateY(50px);
+        -moz-transform: translateY(50px);
+      }
+
+      .animated-mail .top-fold {
+        transition: transform .4s, z-index .2s;
+        transform: rotateX(180deg);
+        -webkit-transition: transform .4s, z-index .2s;
+        -webkit-transform: rotateX(180deg);
+        -moz-transition: transform .4s, z-index .2s;
+        -moz-transform: rotateX(180deg);
+        z-index: 0;
+      }
+
+      .animated-mail .letter {
+        height: 180px;
+      }
+
+      .shadow {
+        width: 250px;
+      }
+    }
+
+    center {
+      padding-top: 15%;
+      font-size: 400%;
+    }
+
+    .landing {
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100vh;
+      /* background-image: linear-gradient(to top, rgba(1, 1, 1, 0.7), rgba(195, 194, 185, 0.7)), url('https://static.vecteezy.com/system/resources/thumbnails/007/934/471/small/initial-vj-logo-shield-crown-style-luxury-elegant-monogram-logo-design-free-vector.jpg'); */
+      background-size: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class = "landing">
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a style="font-size:1.5em" class="navbar-brand" href="#">VJobs</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a style="font-size:1.5em" class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a style="font-size:1.5em" class="nav-link" href="/jobs">Job Opportunities</a>
+          </li>
+          <li class="nav-item">
+            <a style="font-size:1.5em" class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a style="font-size:1.5em" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+              role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              yet to decide
+            </a>
+            <ul style="background: transparent;border: none;" class="dropdown-menu"
+              aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="#">blah</a></li>
+              <li><a class="dropdown-item" href="#">blah</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav  mb-2 text-end mb-lg-0">
+          <%if(!currentuser){%>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/register"><button type="button"
+                  class="btn btn-primary">Sign Up</button></a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/login"><button type="button"
+                  class="btn btn-success">Login</button></a>
+            </li>
+            <%}else{%>
+              <li class="nav-item">
+                <a style="font-size:1.2em" class="nav-link active" aria-current="page" href="#">Signed in as
+                  <%=currentuser.username%>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/logout"><button type="button" class="btn btn-danger">LogOut</button></a>
+              </li>
+              <%}%>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="letter-image">
+    <div class="animated-mail">
+      <div class="back-fold"></div>
+      <div class="letter">
+        <div class="letter-border"></div>
+        <div class="letter-title"></div>
+        <div class="letter-context"><br>
+          <p>Welcome to VJobs !!</p>
+        </div>
+        <div class="letter-stamp">
+          <div class="letter-stamp-inner"></div>
+        </div>
+      </div>
+      <div class="top-fold"></div>
+      <div class="body"></div>
+      <div class="left-fold"></div>
+    </div>
+    <div class="shadow"></div>
+  </div>
+  </nav>
+  <!-- <center>
+
+
+
+    Welcome to VJobs!!
+
+  </center> -->
+  </div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<-- <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -75,4 +386,4 @@
         </center>
         </div>
 </body>
-</html>
+</html> -->
